@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'posts_app.apps.PostsAppConfig',
-    # 'crispy_forms',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -55,8 +55,8 @@ ROOT_URLCONF = 'postmynotes.urls'
 TEMPLATES = [
     {
         'BACKEND' : 'django.template.backends.django.DjangoTemplates',
-        'DIRS'    : [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS'    : [os.path.join(BASE_DIR, 'posts_app/templates/posts_app'),
+                     os.path.join(BASE_DIR, 'users/templates/users'), ],
         'APP_DIRS': True,
         'OPTIONS' : {
             'context_processors': [
@@ -124,11 +124,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-LOGIN_URL = 'login'  # TODO no 1
-LOGIN_REDIRECT_URL = 'pmn-home'  # TODO no 2
-
-LOGOUT_REDIRECT_URL = 'login'
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'home'
+# LOGOUT_REDIRECT_URL = 'home'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)
+# TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'templates'),)

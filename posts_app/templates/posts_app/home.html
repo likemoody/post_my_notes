@@ -1,0 +1,29 @@
+{% extends 'posts_app/base_generic.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <input type="submit" value="Add Post" class="js-button">
+        </form>
+    {% endif %}
+    {% for post in posts %}
+        <article class="media content-section">
+            {#            <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"/>#}
+            <div class="media-body">
+                <div class="article-metadata">
+                    <a class="mr-2" href="
+{#{% url 'user-posts' post.author.username %}#}
+">{{ post.author }}</a>
+                    <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                </div>
+                <h2><a class="article-title" href="
+{#{% url 'post-details' post.id %}#}
+">{{ post.title }}</a></h2>
+                <p class="article-content">{{ post.content }}</p>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock %}
