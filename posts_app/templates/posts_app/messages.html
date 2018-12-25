@@ -1,0 +1,34 @@
+{% extends 'posts_app/base_generic.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {#    {% if request.user.is_authenticated %}#}
+    {#        <form action="" method="post">#}
+    {#            {% csrf_token %}#}
+    {#            {{ form|crispy }}#}
+    {#            <input type="submit" value="Add Post" class="btn btn-outline-info mb-4">#}
+    {#        </form>#}
+    {#    {% endif %}#}
+
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ send_message_form|crispy }}
+        <input type="submit" value="Send Message" class="btn btn-outline-info mb-4">
+    </form>
+    {% for pm in private_messages %}
+        <section class="media content-section">
+            {#            <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"/>#}
+            <div class="media-body">
+                <div class="article-metadata">
+                    <small class="text-muted"><b class="mr-2">{{ pm.user_from }}
+                        >> {{ pm.user_to }}</b>{{ pm.date_sent|date:"F d, Y" }}</small>
+                    {% if not pm.is_read %}
+                        <small class="text-muted"><i>unread</i></small>
+                    {% endif %}
+                </div>
+                <p class="article-content">{{ pm.content|truncatewords:3 }}</p>
+                <a href="{% url 'message-single' pm.id %}">More</a>
+            </div>
+        </section>
+    {% endfor %}
+{% endblock %}

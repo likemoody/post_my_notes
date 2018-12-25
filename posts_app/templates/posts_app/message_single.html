@@ -1,0 +1,15 @@
+{% extends 'posts_app/base_generic.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <section class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+                <small class="text-muted"><b class="mr-2">{{ private_message.user_from }}
+                    >> {{ private_message.user_to }}</b>{{ private_message.date_sent|date:"F d, Y" }}</small>
+            </div>
+            <p class="article-content">{{ private_message.content }}</p>
+            <a href="{% url 'messages' %}">Back</a>
+        </div>
+    </section>
+{% endblock %}

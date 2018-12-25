@@ -1,0 +1,27 @@
+{% extends 'posts_app/base_generic.html' %}
+
+{% block content %}
+    <article class="media content-section">
+        {#            <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"/>#}
+        <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="
+{#{% url 'user-posts' post.author.username %}#}
+">{{ post.author }}</a>
+                <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+            </div>
+            <h2>{{ post.title }}</h2>
+            <p class="article-content">{{ post.content }}</p>
+        </div>
+        <div>
+            {% for comment in post.post_comments.all %}
+                <div>
+                    <h5>{{ comment.author }}</h5>
+                    <small>{{ comment.date_posted }}</small>
+                </div>
+                <p>{{ comment.content }}</p>
+            {% endfor %}
+        </div>
+    </article>
+
+{% endblock %}

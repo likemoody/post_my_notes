@@ -6,7 +6,7 @@
         <form action="" method="post">
             {% csrf_token %}
             {{ form|crispy }}
-            <input type="submit" value="Add Post" class="js-button">
+            <input type="submit" value="Add Post" class="btn btn-outline-info mb-4">
         </form>
     {% endif %}
     {% for post in posts %}
@@ -18,10 +18,15 @@
 {#{% url 'user-posts' post.author.username %}#}
 ">{{ post.author }}</a>
                     <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
+                    {% if post.post_comments.all|length > 1 %}
+                        <small class="text-muted">|
+                            <a href="{% url 'post-details' post.id %}">{{ post.post_comments.all|length }} comments</a></small>
+                    {% elif  post.post_comments.all|length == 1 %}
+                        <small class="text-muted">|
+                            <a href="{% url 'post-details' post.id %}">1 comment</a></small>
+                    {% endif %}
                 </div>
-                <h2><a class="article-title" href="
-{#{% url 'post-details' post.id %}#}
-">{{ post.title }}</a></h2>
+                <h2><a class="article-title" href="{% url 'post-details' post.id %}">{{ post.title }}</a></h2>
                 <p class="article-content">{{ post.content }}</p>
             </div>
         </article>
