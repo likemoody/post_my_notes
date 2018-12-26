@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.base import View
 
 from posts_app.models import Post
+from ..models import Profile
 from ..forms import UserUpdateForm
 
 

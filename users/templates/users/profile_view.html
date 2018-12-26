@@ -11,8 +11,8 @@
         </div>
         <h1 class="border-bottom mb-4">Profile Info</h1>
         <p><b>Username:</b> {{ user_profile.username }}</p>
-        <p><b>Date joined:</b> {{ user_profile.date_joined }}</p>
-        {#        todo!!#}
+        <p><b>Date joined:</b> {{ user_profile.date_joined|date:"F d, Y" }}</p>
+
         {% if user_profile.id == request.user.id %}
             <a href="{% url 'profile-edit' %}" class="btn btn-outline-info">Update Info</a>
         {% else %}
@@ -22,18 +22,21 @@
 
     {% if user_profile.id == request.user.id %}
         <h3>My Posts</h3>
-    {% elif posts %}
+        {% if not posts %}
+            <p>You don't have posts yet</p>
+        {% endif %}
+    {% elif user_profile.id != request.user.id %}
         <h3>{{ user_profile.username }}'s posts</h3>
+        {% if not posts %}
+            <p>No posts here yet</p>
+        {% endif %}
     {% endif %}
 
     {% for post in posts %}
         <article class="media content-section">
-            {#            <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"/>#}
             <div class="media-body">
                 <div class="article-metadata">
-                    <a class="mr-2" href="
-{#{% url 'user-posts' post.author.username %}#}
-">{{ post.author }}</a>
+                    <a class="mr-2" href="#">{{ post.author }}</a>
                     <small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>
                     {% if post.post_comments.all|length > 1 %}
                         <small class="text-muted">| {{ post.post_comments.all|length }} comments</small>
