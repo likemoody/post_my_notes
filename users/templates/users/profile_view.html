@@ -3,19 +3,29 @@
 {% block content %}
     <div class="content-section">
         <div class="media">
-            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
+            <img class="rounded-circle account-img" src="{{ user_profile.profile.image.url }}">
             <div class="media-body">
-                <h2 class="account-heading">{{ user.get_full_name }}</h2>
-                <p class="text-secondary">{{ user.email }}</p>
+                <h2 class="account-heading">{{ user_profile.get_full_name }}</h2>
+                <p class="text-secondary">{{ user_profile.email }}</p>
             </div>
         </div>
         <h1 class="border-bottom mb-4">Profile Info</h1>
-        <p><b>Username:</b> {{ request.user.username }}</p>
-        <p><b>Date joined:</b> {{ request.user.date_joined }}</p>
-        <a href="{% url 'profile-edit' %}" class="btn btn-outline-info">Update Info</a>
+        <p><b>Username:</b> {{ user_profile.username }}</p>
+        <p><b>Date joined:</b> {{ user_profile.date_joined }}</p>
+        {#        todo!!#}
+        {% if user_profile.id == request.user.id %}
+            <a href="{% url 'profile-edit' %}" class="btn btn-outline-info">Update Info</a>
+        {% else %}
+            <a href="{% url 'send-message-to' user_profile.id %}" class="btn btn-outline-info">Send message</a>
+        {% endif %}
     </div>
 
-    <h2>My Posts</h2>
+    {% if user_profile.id == request.user.id %}
+        <h3>My Posts</h3>
+    {% elif posts %}
+        <h3>{{ user_profile.username }}'s posts</h3>
+    {% endif %}
+
     {% for post in posts %}
         <article class="media content-section">
             {#            <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"/>#}

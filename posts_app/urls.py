@@ -5,7 +5,9 @@ from .views import posts_views, messages_views
 urlpatterns = [
     path('', posts_views.AllPostsView.as_view(), name='home'),
     path('create-post/', posts_views.CreatePostView.as_view(), name='create-post'),
-    path('post/<int:post_id>', posts_views.PostDetailsView.as_view(), name='post-details'),
+    path('post/<int:post_id>/', posts_views.PostDetailsView.as_view(), name='post-details'),
     path('messages/', messages_views.MessagesView.as_view(), name='messages'),
-    path('message/<int:message_id>', messages_views.SingleMessageView.as_view(), name='message-single')
+    path('message/<int:message_id>/', messages_views.SingleMessageView.as_view(), name='message-single'),
+    path('send-message/', messages_views.SendMessageView.as_view(), name='send-message'),
+    path('send-message/<int:uid>/', messages_views.SendMessageToView.as_view(), name='send-message-to'),
 ]

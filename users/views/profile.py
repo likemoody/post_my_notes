@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 
@@ -10,8 +11,9 @@ from ..forms import UserUpdateForm
 
 
 class UserProfileView(LoginRequiredMixin, View):
-    def get(self, request):
-        posts = Post.objects.filter(author_id=request.user.id).order_by('-date_posted')
+    def get(self, request, uid):
+        posts = Post.objects.filter(author_id=uid).order_by('-date_posted')
+        user_profile = User.objects.get(pk=uid)
         return render(request, 'profile_view.html', locals())
 
 

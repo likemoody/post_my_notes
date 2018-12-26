@@ -1,7 +1,7 @@
 <header class="site-header">
     <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
         <div class="container">
-            <a class="navbar-brand mr-4" href="{% url 'home' %}">Ćwitter</a>
+            <a class="navbar-brand pr-1 mr-1" href="{% url 'home' %}">Ćwitter</a><sup class="mr-4">alpha</sup>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
                     aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -14,7 +14,7 @@
                 <div class="navbar-nav">
                     {% if user.is_authenticated %}
                     <a class="nav-item nav-link" href="{% url 'create-post' %}">New Post</a>
-                    <a class="nav-item nav-link" href="{% url 'profile-view' %}">{{ user.username }}</a>
+                    <a class="nav-item nav-link" href="{% url 'profile-view' user.id %}">{{ user.username }}</a>
                     <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
                     {% else %}
                     <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>

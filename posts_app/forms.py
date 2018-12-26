@@ -13,6 +13,15 @@ class SendMessageForm(forms.ModelForm):
         model = Message
         fields = ['user_to', 'content']
         labels = {
-            'user_to': 'Send message',
+            'user_to': '',
+            'content': '',
+        }
+
+
+class SendMessageToForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = ['content']
+        labels = {
             'content': '',
         }
