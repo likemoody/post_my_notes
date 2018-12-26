@@ -16,7 +16,6 @@ class MessagesView(LoginRequiredMixin, View):
         private_messages = Message.objects.filter(
             Q(user_to=request.user.id) |
             Q(user_from=request.user.id)).order_by('-date_sent')
-        unread_messages = len(private_messages.filter(is_read=False, user_to=request.user.id))
         send_message_form = SendMessageForm(initial={'user_from': request.user})
         return render(request, 'posts_app/messages.html', locals())
 

@@ -25,7 +25,9 @@ SECRET_KEY = vars.SECRET_KEY
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+]
 
 # Application definition
 
@@ -65,6 +67,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'postmynotes.context_processors.version_date',
+                'postmynotes.context_processors.unread_messages',
             ],
         },
     },

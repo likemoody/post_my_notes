@@ -9,23 +9,26 @@
         <input type="submit" value="Send Message" class="btn btn-outline-info mb-4">
     </form>
 
-
     <h4>My messages</h4>
-    Undread:
-    {% for pm in private_messages %}
-        <section class="media content-section">
-            {#            <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"/>#}
-            <div class="media-body">
-                <div class="article-metadata">
-                    <small class="text-muted"><b class="mr-2">{{ pm.user_from }}
-                        >> {{ pm.user_to }}</b>{{ pm.date_sent|date:"F d, Y g:h a" }}</small>
-                    {% if not pm.is_read %}
-                        <small class="text-muted"><i>unread</i></small>
-                    {% endif %}
+    {% if private_messages %}
+        {% for pm in private_messages %}
+            <section class="media content-section">
+                {#            <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"/>#}
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <small class="text-muted"><b class="mr-2">{{ pm.user_from }}
+                            >> {{ pm.user_to }}</b>{{ pm.date_sent|date:"F d, Y g:h a" }}</small>
+                        {% if not pm.is_read %}
+                            <small class="text-muted"><i>unread</i></small>
+                        {% endif %}
+                    </div>
+                    <p class="article-content">{{ pm.content|truncatewords:3 }}</p>
+                    <a href="{% url 'message-single' pm.id %}">More</a>
                 </div>
-                <p class="article-content">{{ pm.content|truncatewords:3 }}</p>
-                <a href="{% url 'message-single' pm.id %}">More</a>
-            </div>
-        </section>
-    {% endfor %}
+            </section>
+        {% endfor %}
+    {% else %}
+        <p>You don't have messages yet.</p>
+    {% endif %}
+
 {% endblock %}
