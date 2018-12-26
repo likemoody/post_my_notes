@@ -88,3 +88,13 @@ a.article-title:hover {
     color: #FFF;
     margin-bottom: 40px;
 }
+
+.js-container-mini {
+    width: 600px;
+    overflow-wrap: break-word;
+}
+
+.js-container-mini--no-pic {
+    width: 690px;
+    overflow-wrap: break-word;
+}

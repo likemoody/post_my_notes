@@ -8,7 +8,7 @@
                 <small class="text-muted"><b class="mr-2">{{ private_message.user_from }}
                     >> {{ private_message.user_to }}</b>{{ private_message.date_sent|date:"F d, Y" }}</small>
             </div>
-            <p class="article-content">{{ private_message.content }}</p>
+            <p class="js-container-mini article-content">{{ private_message.content }}</p>
             <a href="{% url 'messages' %}">Back</a>
         </div>
     </section>

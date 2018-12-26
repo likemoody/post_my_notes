@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Message
+from .models import Post, Message, Comment
 
 
 class CreatePostForm(forms.ModelForm):
@@ -25,3 +25,13 @@ class SendMessageToForm(forms.ModelForm):
         labels = {
             'content': '',
         }
+
+
+class AddCommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['content']
+        labels = {
+            'content': ''
+        }
+
