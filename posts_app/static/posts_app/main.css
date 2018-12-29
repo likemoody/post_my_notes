@@ -113,3 +113,8 @@ a.article-title:hover {
     display: inline-block;
     align: center;
 }
+
+.jm-link-text-setting {
+    text-align: left;
+    color:rgb(0, 76, 185);
+}
