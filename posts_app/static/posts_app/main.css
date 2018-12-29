@@ -13,7 +13,13 @@ ul {
 }
 
 .bg-steel {
-    background-color: #6D9384;
+    background-color: rgb(64, 96, 184);
+    border-top: 1px solid #444444;
+    border-bottom: 1px solid #444444;
+}
+
+.version {
+    color: white;
 }
 
 .site-header .navbar-nav .nav-link {
@@ -102,7 +108,7 @@ a.article-title:hover {
 .unread-pm {
     height: 7px;
     width: 7px;
-    background-color: #5b80b2;
+    background-color: rgb(64, 96, 184);
     border-radius: 50%;
     display: inline-block;
     align: center;

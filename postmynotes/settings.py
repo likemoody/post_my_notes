@@ -29,7 +29,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
 ]
 
-PROJECT_VERSION = 'alpha 0.2'
+PROJECT_VERSION = 'βeta dev 1.0'
 # Application definition
 
 INSTALLED_APPS = [

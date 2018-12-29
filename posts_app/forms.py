@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.models import User
+
 from .models import Post, Message, Comment
 
 
@@ -16,6 +18,10 @@ class SendMessageForm(forms.ModelForm):
             'user_to': '',
             'content': '',
         }
+
+    def __init__(self, user, *args, **kwargs):
+        super(SendMessageForm, self).__init__(*args, **kwargs)
+        self.fields['user_to'].queryset = User.objects.exclude(pk=user.id)
 
 
 class SendMessageToForm(forms.ModelForm):

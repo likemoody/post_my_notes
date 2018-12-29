@@ -6,7 +6,7 @@
     <form action="" method="post">
         {% csrf_token %}
         {{ send_message_form|crispy }}
-        <input type="submit" value="Send Message" class="btn btn-outline-info mb-4">
+        <input type="submit" value="Send Message" class="btn btn-primary mb-4">
     </form>
 
     <h4>My messages</h4>

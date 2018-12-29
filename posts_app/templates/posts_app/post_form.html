@@ -1,10 +1,13 @@
 {% extends 'posts_app/base_generic.html' %}
 {% load crispy_forms_tags %}
+{% block title %}
+    {{ block.super }} | New Post
+{% endblock %}
 
 {% block content %}
     <form action="" method="post">
         {% csrf_token %}
         {{ form|crispy }}
-        <input type="submit" value="Add Post" class="btn btn-outline-info mb-4">
+        <input type="submit" value="Add Post" class="btn btn-primary mb-4">
     </form>
 {% endblock %}
