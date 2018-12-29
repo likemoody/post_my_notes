@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 
 class Post(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=140)
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='posts')
@@ -32,7 +32,7 @@ class Comment(models.Model):
 
 
 class Message(models.Model):
-    content = models.TextField()
+    content = models.TextField(max_length=60)
     date_sent = models.DateTimeField(default=timezone.now)
     date_read = models.DateTimeField(default=timezone.now, null=True)
     user_from = models.ForeignKey(User, on_delete=models.CASCADE,  # note to let message have sender and receiver

@@ -22,8 +22,22 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 class AllPostsView(View):
     def get(self, request):
         form = CreatePostForm()
-        posts = Post.objects.all().order_by('-date_posted')
+        posts = Post.objects.filter(banned=False).order_by('-date_posted')
         return render(request, 'posts_app/home.html', locals())
+
+    def post(self, request):
+        form = CreatePostForm(request.POST)
+        if form.is_valid():
+            content = form.cleaned_data.get('content')
+            title = form.cleaned_data.get('title')
+            date_posted = datetime.datetime.now()
+            author = User.objects.get(pk=request.user.id)
+            Post.objects.create(content=content,
+                                date_posted=date_posted,
+                                author=author,
+                                title=title,
+                                banned=False)
+        return redirect('home')
 
 
 class PostDetailsView(View):

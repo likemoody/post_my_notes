@@ -6,7 +6,12 @@
             <img class="rounded-circle account-img" src="{{ user_profile.profile.image.url }}">
             <div class="media-body">
                 <h2 class="account-heading">{{ user_profile.get_full_name }}</h2>
-                <p class="text-secondary">{{ user_profile.email }}</p>
+                {% if user_profile.id == request.user.id %}
+                    <p class="text-secondary">{{ user_profile.email }}</p>
+                {% endif %}
+            {% if user_profile.profile.description %}
+                <p class="text-secondary">{{ user_profile.profile.description }}</p>
+            {% endif %}
             </div>
         </div>
         <h1 class="border-bottom mb-4">Profile Info</h1>

@@ -98,3 +98,12 @@ a.article-title:hover {
     width: 690px;
     overflow-wrap: break-word;
 }
+
+.unread-pm {
+    height: 7px;
+    width: 7px;
+    background-color: #5b80b2;
+    border-radius: 50%;
+    display: inline-block;
+    align: center;
+}

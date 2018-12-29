@@ -7,8 +7,7 @@ from django.shortcuts import render, redirect
 from django.views.generic.base import View
 
 from posts_app.models import Post
-from ..models import Profile
-from ..forms import UserUpdateForm
+from ..forms import UserUpdateForm, ProfileUpdateForm
 
 
 class UserProfileView(LoginRequiredMixin, View):
@@ -20,18 +19,23 @@ class UserProfileView(LoginRequiredMixin, View):
 
 class UserProfileEditView(LoginRequiredMixin, View):
     def get(self, request):
-        form = UserUpdateForm(instance=request.user)
-        p_form = PasswordChangeForm(request.user)
+        user_profile = User.objects.get(pk=request.user.id)
+        user_form = UserUpdateForm(instance=request.user)
+        password_form = PasswordChangeForm(request.user)
+        profile_form = ProfileUpdateForm(instance=request.user)
         return render(request, 'profile_edit.html', locals())
 
     def post(self, request):
-        form = UserUpdateForm(request.POST, instance=request.user)
-        p_form = PasswordChangeForm(request.user, request.POST)
-
-        if form.is_valid() and p_form.is_valid():
-            user = p_form.save()
-            form.save()
-            update_session_auth_hash(request, user)                         # note important! To keep user logged in.
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        password_form = PasswordChangeForm(request.user, request.POST)
+        profile_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if user_form.is_valid() and profile_form.is_valid() and password_form.is_valid():
+            user = password_form.save()
+            update_session_auth_hash(request, user)                        # note important! To keep user logged in.
+            user_form.save()
+            profile_form.save()
             messages.success(request, 'Profile updated successfully')
-            return redirect('profile-view')
+            return redirect('profile-view', uid=request.user.id)
         return render(request, 'profile_edit.html', locals())
+
+

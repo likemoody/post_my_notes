@@ -2,12 +2,13 @@ import datetime
 
 from django.db.models.query_utils import Q
 
+from postmynotes.settings import PROJECT_VERSION
 from posts_app.models import Message
 
 
 def version_date(request):
     ctx = {
-        'project_version': 'alpha 0.1',
+        'project_version': PROJECT_VERSION,
         'current_date'   : datetime.datetime.now(),
     }
     return ctx

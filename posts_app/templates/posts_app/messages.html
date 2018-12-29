@@ -21,10 +21,10 @@
                             {{ pm.date_sent|date:"F d, Y g:h a" }}
                         </small>
                         {% if not pm.is_read %}
-                            <small class="text-muted">small</small>
+                            <span class="text-muted unread-pm"></span>
                         {% endif %}
                     </div>
-                    <p class="js-container-mini article-content">{{ pm.content|truncatewords:3 }}</p>
+                    <p class="js-container-mini article-content">{{ pm.content|truncatewords:10 }}</p>
                     <a href="{% url 'message-single' pm.id %}">More</a>
                 </div>
             </section>

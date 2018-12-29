@@ -29,6 +29,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
 ]
 
+PROJECT_VERSION = 'alpha 0.2'
 # Application definition
 
 INSTALLED_APPS = [
