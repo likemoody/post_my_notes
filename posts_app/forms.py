@@ -11,6 +11,8 @@ class CreatePostForm(forms.ModelForm):
 
 
 class SendMessageForm(forms.ModelForm):
+    user_to = forms.ModelChoiceField(queryset=User.objects.all())
+
     class Meta:
         model = Message
         fields = ['user_to', 'content']
@@ -19,9 +21,10 @@ class SendMessageForm(forms.ModelForm):
             'content': '',
         }
 
-    def __init__(self, user, *args, **kwargs):
-        super(SendMessageForm, self).__init__(*args, **kwargs)
-        self.fields['user_to'].queryset = User.objects.exclude(pk=user.id)
+    # def __init__(self, uid, *args, **kwargs):
+    #     super(SendMessageForm, self).__init__(*args, **kwargs)
+    #     self.fields['user_to'].queryset = User.objects.exclude(
+    #         pk=uid)
 
 
 class SendMessageToForm(forms.ModelForm):
@@ -40,4 +43,3 @@ class AddCommentForm(forms.ModelForm):
         labels = {
             'content': ''
         }
-

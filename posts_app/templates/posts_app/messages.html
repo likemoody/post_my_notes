@@ -2,12 +2,19 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <h4>Send message</h4>
-    <form action="" method="post">
-        {% csrf_token %}
-        {{ send_message_form|crispy }}
-        <input type="submit" value="Send Message" class="btn btn-primary mb-4">
-    </form>
+    <p>
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                aria-expanded="false" aria-controls="collapseExample">
+            New Message
+        </button>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ send_message_form|crispy }}
+            <input type="submit" value="Send" class="btn btn-primary mb-4">
+        </form>
+    </div>
 
     <h4>My messages</h4>
     {% if private_messages %}

@@ -16,7 +16,11 @@ class MessagesView(LoginRequiredMixin, View):
         private_messages = Message.objects.filter(
             Q(user_to=request.user.id) |
             Q(user_from=request.user.id)).order_by('-date_sent')
-        send_message_form = SendMessageForm(user=request.user, initial={'user_from': request.user})
+        send_message_form = SendMessageForm(initial={'user_from': request.user})
+
+        # note exclude current user from queryset
+        send_message_form.fields["user_to"].queryset = User.objects.exclude(pk=request.user.id)
+
         return render(request, 'posts_app/messages.html', locals())
 
     def post(self, request):
@@ -43,7 +47,7 @@ class SingleMessageView(LoginRequiredMixin, View):
 
 class SendMessageView(LoginRequiredMixin, View):
     def get(self, request):
-        send_message_form = SendMessageForm(user=request.user, initial={'user_from': request.user})
+        send_message_form = SendMessageForm(initial={'user_from': request.user})
         return render(request, 'posts_app/send_pm.html', locals())
 
     def post(self, request):

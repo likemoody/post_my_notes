@@ -8,8 +8,10 @@
             </a>
             <a class="list-group-item list-group-item-light btn btn-light jm-link-text-setting"
                href="{% url 'messages' %}">
-                Messages {% if unread_messages %}
-                <span class="badge badge-primary">{{ unread_messages }}</span>{% endif %}
+                Messages
+                {% if unread_messages %}
+                    <span class="badge badge-primary badge-pill">{{ unread_messages }}</span>
+                {% endif %}
             </a>
         </div>
     </div>

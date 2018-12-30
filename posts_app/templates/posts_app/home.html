@@ -6,12 +6,21 @@
 
 {% block content %}
     {% if request.user.is_authenticated %}
-        <form action="" method="post">
-            {% csrf_token %}
-            {{ form|crispy }}
-            <input type="submit" value="Add Post" class="btn btn-primary mb-4">
-        </form>
+        <p>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample">
+                New Post
+            </button>
+        </p>
+        <div class="collapse" id="collapseExample">
+            <form action="" method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input type="submit" value="Add" class="btn btn-primary mb-4">
+            </form>
+        </div>
     {% endif %}
+
     {% for post in posts %}
         <article class="media content-section">
             <img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}"/>
