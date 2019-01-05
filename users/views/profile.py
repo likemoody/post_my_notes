@@ -6,13 +6,14 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 
+from postmynotes.utils import *
 from posts_app.models import Post
 from ..forms import UserUpdateForm, ProfileUpdateForm
 
 
 class UserProfileView(LoginRequiredMixin, View):
     def get(self, request, uid):
-        posts = Post.objects.filter(author_id=uid).order_by('-date_posted')
+        posts = QueryPosts.query_posts(Post, banned=False, author_id=uid)
         user_profile = User.objects.get(pk=uid)
         return render(request, 'profile_view.html', locals())
 
@@ -22,6 +23,9 @@ class UserProfileEditView(LoginRequiredMixin, View):
         user_profile = User.objects.get(pk=request.user.id)
         user_form = UserUpdateForm(instance=request.user)
         password_form = PasswordChangeForm(request.user)
+        password_form.fields['old_password'].required = False              # note accessing form fields
+        password_form.fields['new_password1'].required = False
+        password_form.fields['new_password2'].required = False
         profile_form = ProfileUpdateForm(instance=request.user)
         return render(request, 'profile_edit.html', locals())
 

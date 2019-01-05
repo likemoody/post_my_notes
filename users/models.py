@@ -8,6 +8,7 @@ class Profile(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     description = models.TextField(max_length=150, null=True)
 
+
     def save(self, force_insert=False, force_update=False, using=None,
              update_fields=None):
         super().save()

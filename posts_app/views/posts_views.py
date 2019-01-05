@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView, CreateView
 from django.views.generic.base import View
 
+from postmynotes.utils import *
 from ..forms import CreatePostForm, AddCommentForm
 from ..models import Post, Comment
 
@@ -22,7 +23,7 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 class AllPostsView(View):
     def get(self, request):
         form = CreatePostForm()
-        posts = Post.objects.filter(banned=False).order_by('-date_posted')
+        posts = QueryPosts.query_posts(Post, banned=False)
         return render(request, 'posts_app/home.html', locals())
 
     def post(self, request):
